@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Kategori;
+use App\Observers\KategoriObserver;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +25,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Kategori::observe(KategoriObserver::class);
     }
 }

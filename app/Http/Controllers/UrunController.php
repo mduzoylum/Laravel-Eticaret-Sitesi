@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class UrunController extends Controller
 {
-    public function index()
+    public function index($slug_urunadi)
     {
         return view('urun');
     }
