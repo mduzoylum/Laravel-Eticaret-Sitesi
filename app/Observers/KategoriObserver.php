@@ -11,13 +11,15 @@ class KategoriObserver
 
     public function saving(Kategori $kategori)
     {
-        Log::info("Saving içindeyim", []);
-        $kategori->slug = Str::slug($kategori->kategori_adi);
+        //Log::info("Saving içindeyim", []);
+        //$kategori->slug = Str::slug($kategori->kategori_adi);
     }
 
     public function deleting(Kategori $kategori)
     {
+        //todo deleted olayına bakılacak
         Log::info("deleting içindeyim", []);
+//        $kategori->subCategory()->delete();
     }
 
     /**
@@ -51,6 +53,7 @@ class KategoriObserver
     public function deleted(Kategori $kategori)
     {
         Log::info("Deleted içindeyim", []);
+        $kategori->subCategory()->delete();
     }
 
     /**

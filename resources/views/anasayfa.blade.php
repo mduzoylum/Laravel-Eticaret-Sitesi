@@ -8,7 +8,8 @@
                     <div class="panel-heading">Kategoriler</div>
                     <div class="list-group categories">
                         @foreach($kategoriler as $kategori)
-                        <a href="{{ route('kategori',$kategori->slug) }}" class="list-group-item"><i class="fa fa-arrow-circle-o-right"></i> {{$kategori->kategori_adi}}</a>
+                            <a href="{{ route('kategori',$kategori->slug) }}" class="list-group-item"><i
+                                    class="fa fa-arrow-circle-o-right"></i> {{$kategori->kategori_adi}}</a>
                         @endforeach
                     </div>
                 </div>
@@ -16,29 +17,20 @@
             <div class="col-md-6">
                 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
-                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                        @for($i=0;$i<count($urunler_slider);$i++)
+                            <li data-target="#carousel-example-generic" data-slide-to="{{$i}}"
+                                class="{{$i==0 ? 'active' : ''}}"></li>
+                        @endfor
                     </ol>
                     <div class="carousel-inner" role="listbox">
-                        <div class="item active">
-                            <img src="https://via.placeholder.com/640x400.png?text=Resim 1" alt="...">
-                            <div class="carousel-caption">
-                                Slide 1
+                        @foreach($urunler_slider as $index => $urun_detay)
+                            <div class="item {{$index==0 ? 'active' : ''}}">
+                                <img src="https://via.placeholder.com/640x400.png?text=Resim 1" alt="...">
+                                <div class="carousel-caption">
+                                    {{$urun_detay->urun->urun_adi}}
+                                </div>
                             </div>
-                        </div>
-                        <div class="item">
-                            <img src="https://via.placeholder.com/640x400.png?text=Resim 2" alt="...">
-                            <div class="carousel-caption">
-                                Slide 2
-                            </div>
-                        </div>
-                        <div class="item">
-                            <img src="https://via.placeholder.com/640x400.png?text=Resim 3" alt="...">
-                            <div class="carousel-caption">
-                                Slide 3
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                     <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
                         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -55,7 +47,8 @@
                     <div class="panel-heading">Günün Fırsatı</div>
                     <div class="panel-body">
                         <a href="#">
-                            <img src="https://via.placeholder.com/400x485.png?text=Günün Fırsatı" class="img-responsive">
+                            <img src="https://via.placeholder.com/400x485.png?text=Günün Fırsatı"
+                                 class="img-responsive">
                         </a>
                     </div>
                 </div>

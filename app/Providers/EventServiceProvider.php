@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Events\KategoriCreated;
+use App\Events\KategoriDeleted;
+use App\Listeners\KategoriCreatedListener;
+use App\Listeners\KategoriDeletedListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -18,6 +22,14 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+
+        KategoriCreated::class=>[
+            KategoriCreatedListener::class
+        ],
+
+        KategoriDeleted::class=>[
+            KategoriDeletedListener::class
+        ]
     ];
 
     /**
@@ -27,6 +39,6 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+
     }
 }
