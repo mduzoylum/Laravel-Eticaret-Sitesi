@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Kategori;
 use App\Observers\KategoriObserver;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

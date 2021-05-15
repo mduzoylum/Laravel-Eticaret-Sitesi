@@ -27,7 +27,7 @@
                             <div class="item {{$index==0 ? 'active' : ''}}">
                                 <img src="https://via.placeholder.com/640x400.png?text=Resim 1" alt="...">
                                 <div class="carousel-caption">
-                                    {{$urun_detay->urun->urun_adi}}
+                                    {{$urun_detay->urun_adi}}
                                 </div>
                             </div>
                         @endforeach
@@ -46,8 +46,8 @@
                 <div class="panel panel-default" id="sidebar-product">
                     <div class="panel-heading">Günün Fırsatı</div>
                     <div class="panel-body">
-                        <a href="#">
-                            <img src="https://via.placeholder.com/400x485.png?text=Günün Fırsatı"
+                        <a href="{{route('urun',$urun_gunun_firsati->slug)}}">
+                            <img src="https://via.placeholder.com/400x485.png?text={{$urun_gunun_firsati->urun_adi}}"
                                  class="img-responsive">
                         </a>
                     </div>
@@ -61,26 +61,13 @@
                 <div class="panel-heading">Öne Çıkan Ürünler</div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-md-3 product">
-                            <a href="#"><img src="https://via.placeholder.com/640x400.png?text=Urun 1"></a>
-                            <p><a href="#">Ürün adı</a></p>
-                            <p class="price">129 ₺</p>
-                        </div>
-                        <div class="col-md-3 product">
-                            <a href="#"><img src="https://via.placeholder.com/640x400.png?text=Urun 2"></a>
-                            <p><a href="#">Ürün adı</a></p>
-                            <p class="price">129 ₺</p>
-                        </div>
-                        <div class="col-md-3 product">
-                            <a href="#"><img src="https://via.placeholder.com/640x400.png?text=Urun 3"></a>
-                            <p><a href="#">Ürün adı</a></p>
-                            <p class="price">129 ₺</p>
-                        </div>
-                        <div class="col-md-3 product">
-                            <a href="#"><img src="https://via.placeholder.com/640x400.png?text=Urun 4"></a>
-                            <p><a href="#">Ürün adı</a></p>
-                            <p class="price">129 ₺</p>
-                        </div>
+                        @foreach($urunler_one_cikan as $urun_detay)
+                            <div class="col-md-3 product">
+                                <a href="#"><img src="https://via.placeholder.com/640x400.png?text=Urun 1"></a>
+                                <p><a href="#">{{$urun_detay->urun_adi}}</a></p>
+                                <p class="price">{{$urun_detay->fiyati}} ₺</p>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -91,26 +78,13 @@
                 <div class="panel-heading">Çok Satan Ürünler</div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-md-3 product">
-                            <a href="#"><img src="https://via.placeholder.com/640x400.png?text=Urun 1"></a>
-                            <p><a href="#">Ürün adı</a></p>
-                            <p class="price">129 ₺</p>
-                        </div>
-                        <div class="col-md-3 product">
-                            <a href="#"><img src="https://via.placeholder.com/640x400.png?text=Urun 2"></a>
-                            <p><a href="#">Ürün adı</a></p>
-                            <p class="price">129 ₺</p>
-                        </div>
-                        <div class="col-md-3 product">
-                            <a href="#"><img src="https://via.placeholder.com/640x400.png?text=Urun 3"></a>
-                            <p><a href="#">Ürün adı</a></p>
-                            <p class="price">129 ₺</p>
-                        </div>
-                        <div class="col-md-3 product">
-                            <a href="#"><img src="https://via.placeholder.com/640x400.png?text=Urun 4"></a>
-                            <p><a href="#">Ürün adı</a></p>
-                            <p class="price">129 ₺</p>
-                        </div>
+                        @foreach($urunler_cok_satan as $urun_detay)
+                            <div class="col-md-3 product">
+                                <a href="#"><img src="https://via.placeholder.com/640x400.png?text=Urun 1"></a>
+                                <p><a href="#">{{$urun_detay->urun_adi}}</a></p>
+                                <p class="price">{{$urun_detay->fiyati}} ₺</p>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -120,26 +94,13 @@
                 <div class="panel-heading">İndirimli Ürünler</div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-md-3 product">
-                            <a href="#"><img src="https://via.placeholder.com/640x400.png?text=Urun 1"></a>
-                            <p><a href="#">Ürün adı</a></p>
-                            <p class="price">129 ₺</p>
-                        </div>
-                        <div class="col-md-3 product">
-                            <a href="#"><img src="https://via.placeholder.com/640x400.png?text=Urun 2"></a>
-                            <p><a href="#">Ürün adı</a></p>
-                            <p class="price">129 ₺</p>
-                        </div>
-                        <div class="col-md-3 product">
-                            <a href="#"><img src="https://via.placeholder.com/640x400.png?text=Urun 3"></a>
-                            <p><a href="#">Ürün adı</a></p>
-                            <p class="price">129 ₺</p>
-                        </div>
-                        <div class="col-md-3 product">
-                            <a href="#"><img src="https://via.placeholder.com/640x400.png?text=Urun 4"></a>
-                            <p><a href="#">Ürün adı</a></p>
-                            <p class="price">129 ₺</p>
-                        </div>
+                        @foreach($urunler_indirimli as $urun_detay)
+                            <div class="col-md-3 product">
+                                <a href="#"><img src="https://via.placeholder.com/640x400.png?text=Urun 1"></a>
+                                <p><a href="#">{{$urun_detay->urun_adi}}</a></p>
+                                <p class="price">{{$urun_detay->fiyati}} ₺</p>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
