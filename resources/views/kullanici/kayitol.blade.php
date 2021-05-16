@@ -8,20 +8,15 @@
                     <div class="panel-heading">Kaydol</div>
                     <div class="panel-body">
 
-                        @if(count($errors))
-                            <div class="alert alert-danger">
-                                @foreach($errors->all() as $error)
-                                    <li>{{$error}}</li>
-                                @endforeach
-                            </div>
-                        @endif
+                        @include('layouts.partials.errors')
 
                         <form class="form-horizontal" role="form" method="POST" action="{{route("kullanici.kaydol")}}">
                             {{csrf_field()}}
-                            <div class="form-group has-error">
+                            <div class="form-group"> {{--has-error--}}
                                 <label for="adsoyad" class="col-md-4 control-label">Kullanıcı Adı</label>
                                 <div class="col-md-6">
-                                    <input id="adsoyad" type="text" class="form-control" name="adsoyad" value=""
+                                    <input id="adsoyad" type="text" class="form-control" name="adsoyad"
+                                           value="{{old('adsoyad')}}"
                                            required autofocus>
                                 </div>
                             </div>
@@ -29,7 +24,7 @@
                             <div class="form-group">
                                 <label for="mail" class="col-md-4 control-label">Email</label>
                                 <div class="col-md-6">
-                                    <input id="mail" class="form-control" name="mail" value="" required>
+                                    <input id="mail" class="form-control" name="mail" value="{{old('mail')}}" required>
                                 </div>
                             </div>
 

@@ -2,16 +2,42 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\KullaniciKayitMail;
 use App\Models\Kullanici;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Mail;
 
 class KullaniciController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('guest')->except('oturumkapat','aktiflestir');
+    }
+
     public function giris_form()
     {
         return view('kullanici.oturumac');
+    }
+
+    public function giris()
+    {
+        $this->validate(request(),[
+            'mail'=> 'required|email',
+            'sifre' => 'required'
+        ]);
+
+        if(auth()->attempt(['mail'=>request('mail'),'password'=>request('sifre')],request('benihatirla')))
+        {
+            request()->session()->regenerate();
+            return redirect()->intended('/');
+        }
+//        else{
+//            $errors=['mail'=>"Hatalı Giriş"];
+//            return back()->withErrors($errors);
+//        }
+
     }
 
     public function kaydol_form()
@@ -30,14 +56,41 @@ class KullaniciController extends Controller
 
         $kullanici = Kullanici::create([
             'adsoyad' => request('adsoyad'),
-            'mail' => request('email'),
+            'mail' => request('mail'),
             'sifre' => Hash::make(request('sifre')),
             'aktivasyon_anahtari' => Str::random(60),
             'aktif_mi' => 0,
         ]);
 
+        Mail::to(request('mail'))->send(new KullaniciKayitMail($kullanici));
+
         auth()->login($kullanici);
 
+        return redirect()->route('anasayfa');
+    }
+
+    public function aktiflestir($anahtar)
+    {
+        $kullanici = Kullanici::where('aktivasyon_anahtari', $anahtar)->first();
+        if (!is_null($kullanici)) {
+            $kullanici->aktivasyon_anahtari = null;
+            $kullanici->aktif_mi = 1;
+            $kullanici->save();
+            return redirect()->to('/')
+                ->with('mesaj', 'Kullanıcı Kaydınız Aktifleştirildi')
+                ->with('mesaj_tur', 'success');
+        } else {
+            return redirect()->to('/')
+                ->with('mesaj', 'Aktivasyon anahtari geçersizdir')
+                ->with('mesaj_tur', 'danger');
+        }
+    }
+
+    public function oturumkapat()
+    {
+        auth()->logout();
+        request()->session()->flush();
+        request()->session()->regenerate();
         return redirect()->route('anasayfa');
     }
 }
