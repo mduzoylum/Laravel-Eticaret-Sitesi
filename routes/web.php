@@ -35,7 +35,10 @@ Route::post('/ara', [UrunController::class, 'ara'])->name('urun_ara');
 
 Route::group(['prefix' => 'sepet'], function () {
     Route::get('/', [SepetController::class, 'index'])->name('sepet');
-    Route::get('/ekle', [SepetController::class, 'ekle'])->name('sepet.ekle');
+    Route::post('/ekle', [SepetController::class, 'ekle'])->name('sepet.ekle');
+    Route::delete('/kaldir/{rowid}', [SepetController::class, 'kaldir'])->name('sepet.kaldir');
+    Route::delete('/bosalt', [SepetController::class, 'bosalt'])->name('sepet.bosalt');
+    Route::patch('/guncelle/{rowid}', [SepetController::class, 'guncelle'])->name('sepet.guncelle');
 });
 
 

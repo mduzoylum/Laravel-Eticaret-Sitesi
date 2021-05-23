@@ -1,12 +1,10 @@
 <?php
-Class test{
-    public static function Ekle()
-    {
-        return 1;
-    }
+
+function getArray($arr)
+{
+    print_r($arr);
 }
 
-// dosya: app/helpers.php
 function is_active($url, $className = 'active')
 {
     return request()->is($url) ? $className : null;

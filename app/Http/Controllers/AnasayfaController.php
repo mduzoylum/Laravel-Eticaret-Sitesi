@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\KategoriCreated;
+use App\Helpers\Cart;
 use App\Models\Kategori;
 use App\Models\Urun;
 use App\Models\UrunDetay;
@@ -52,5 +53,6 @@ class AnasayfaController extends Controller
 
         return view('anasayfa', compact('kategoriler', 'urunler_slider','urun_gunun_firsati','urunler_one_cikan','urunler_cok_satan','urunler_indirimli'));
     }
+
 
 }
