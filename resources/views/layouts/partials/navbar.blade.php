@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="{{route('anasayfa')}}">
                 <img src="{{asset('img/logo.png')}}">
             </a>
         </div>
@@ -27,7 +27,7 @@
                 </div>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><i class="fa fa-shopping-cart"></i> Sepet <span class="badge badge-theme">5</span></a>
+                <li><a href="{{route('sepet')}}"><i class="fa fa-shopping-cart"></i> Sepet <span class="badge badge-theme">{{(Cart::count())}}</span></a>
                 </li>
                 @guest
                     <li><a href="{{route('kullanici.oturumac')}}">Oturum Aç</a></li>

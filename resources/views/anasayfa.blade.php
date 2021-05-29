@@ -66,8 +66,8 @@
                     <div class="row">
                         @foreach($urunler_one_cikan as $urun_detay)
                             <div class="col-md-3 product">
-                                <a href="#"><img src="https://via.placeholder.com/640x400.png?text=Urun 1"></a>
-                                <p><a href="#">{{$urun_detay->urun_adi}}</a></p>
+                                <a href="{{route('urun',$urun_detay->slug)}}"><img src="https://via.placeholder.com/640x400.png?text=Urun 1"></a>
+                                <p><a href="{{route('urun',$urun_detay->slug)}}">{{$urun_detay->urun_adi}}</a></p>
                                 <p class="price">{{$urun_detay->fiyati}} ₺</p>
                             </div>
                         @endforeach
@@ -83,8 +83,8 @@
                     <div class="row">
                         @foreach($urunler_cok_satan as $urun_detay)
                             <div class="col-md-3 product">
-                                <a href="#"><img src="https://via.placeholder.com/640x400.png?text=Urun 1"></a>
-                                <p><a href="#">{{$urun_detay->urun_adi}}</a></p>
+                                <a href="{{route('urun',$urun_detay->slug)}}"><img src="https://via.placeholder.com/640x400.png?text=Urun 1"></a>
+                                <p><a href="{{route('urun',$urun_detay->slug)}}">{{$urun_detay->urun_adi}}</a></p>
                                 <p class="price">{{$urun_detay->fiyati}} ₺</p>
                             </div>
                         @endforeach
@@ -99,8 +99,8 @@
                     <div class="row">
                         @foreach($urunler_indirimli as $urun_detay)
                             <div class="col-md-3 product">
-                                <a href="#"><img src="https://via.placeholder.com/640x400.png?text=Urun 1"></a>
-                                <p><a href="#">{{$urun_detay->urun_adi}}</a></p>
+                                <a href="{{route('urun',$urun_detay->slug)}}"><img src="https://via.placeholder.com/640x400.png?text=Urun 1"></a>
+                                <p><a href="{{route('urun',$urun_detay->slug)}}">{{$urun_detay->urun_adi}}</a></p>
                                 <p class="price">{{$urun_detay->fiyati}} ₺</p>
                             </div>
                         @endforeach

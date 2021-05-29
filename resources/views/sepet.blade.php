@@ -1,6 +1,7 @@
 @extends('layouts.master')
 @section('title','Sepet')
 @section('content')
+    @include('layouts.partials.alert')
     <div class="container">
         <div class="bg-content">
             <h2>Sepet</h2>
@@ -77,9 +78,9 @@
     <script>
 
         $.ajaxSetup({
-           headers:{
-               'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
-           }
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
         });
 
         $(function () {

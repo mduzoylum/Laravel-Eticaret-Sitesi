@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Mail\KullaniciKayitMail;
 use App\Models\Kullanici;
+use App\Models\Sepet;
+use App\Models\SepetUrun;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Mail;
+use Cart;
 
 class KullaniciController extends Controller
 {
@@ -31,12 +34,33 @@ class KullaniciController extends Controller
         if(auth()->attempt(['mail'=>request('mail'),'password'=>request('sifre')],request('benihatirla')))
         {
             request()->session()->regenerate();
+            $aktif_sepet_id=Sepet::firstOrCreate(['kullanici_id'=>auth()->id()])->id;
+            session()->put('aktif_sepet_id',$aktif_sepet_id);
+
+            if(Cart::count()>0)
+            {
+               foreach(Cart::content() as $cartItem)
+               {
+                   SepetUrun::updateOrCreate(
+                    ['sepet_id' => $aktif_sepet_id, 'urun_id' => $cartItem->id],
+                    ['adet' => $cartItem->qty, 'fiyati' => $cartItem->price, 'durum' => 'Beklemede']
+                   );
+               }
+            }
+
+            Cart::destroy();
+            $sepetUrunler=SepetUrun::where('sepet_id',$aktif_sepet_id)->get();
+            foreach ($sepetUrunler  as $sepetUrun)
+            {
+                Cart::add($sepetUrun->urun_id,$sepetUrun->urun->urun_adi,$sepetUrun->adet,$sepetUrun->fiyati,['slug'=>$sepetUrun->urun->slug]);
+            }
+
             return redirect()->intended('/');
         }
-//        else{
-//            $errors=['mail'=>"Hatalı Giriş"];
-//            return back()->withErrors($errors);
-//        }
+        else{
+            $errors=['mail'=>"Hatalı Giriş"];
+            return back()->withErrors($errors);
+        }
 
     }
 
