@@ -8,6 +8,7 @@ use App\Http\Controllers\OdemeController;
 use App\Http\Controllers\SiparisController;
 use App\Http\Controllers\KullaniciController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Yonetim\KullaniciController as YoneticiKullaniciController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,11 +27,19 @@ lenovo-thinkpad-tyzen
 Observer -> Trigger
 User -> delete ->trigger | orders ->user_id ->delete
 */
+//
+Route::group(['prefix' =>"yonetim"],function(){ // "namespace"=>"Yonetim"
+    Route::get('/',function (){
+        return 'admin';
+    });
+
+    Route::get('oturumac',[YoneticiKullaniciController::class,'index'])->name('yonetim.oturumac');
+});
 
 Route::get('/', [AnasayfaController::class, 'index'])->name('anasayfa');
 Route::get('/kategori/{kategori_slug}', [KategoriController::class, 'index'])->name('kategori');
 Route::get('/urun/{slug_urunadi}', [UrunController::class, 'index'])->name('urun');
-Route::get('/ara', [UrunController::class, 'ara'])->name('urun_ara');
+Route::get('/ara', [UrunController::class, 'ara'])->name('urun_ara_get');
 Route::post('/ara', [UrunController::class, 'ara'])->name('urun_ara');
 
 Route::group(['prefix' => 'sepet'], function () {
@@ -41,15 +50,17 @@ Route::group(['prefix' => 'sepet'], function () {
     Route::patch('/guncelle/{rowid}', [SepetController::class, 'guncelle'])->name('sepet.guncelle');
 });
 
+Route::get('/odeme',[OdemeController::class,'index'])->name("odeme");
+Route::post('/odemeyap',[OdemeController::class,'odemeyap'])->name("odemeyap");
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/odeme', [OdemeController::class, 'index'])->name('odeme');
+//    Route::get('/odeme', [OdemeController::class, 'index'])->name('odeme');
     Route::get('/siparisler', [SiparisController::class, 'index'])->name('siparisler');
     Route::get('/siparisler/{id}', [SiparisController::class, 'detay'])->name('siparis');
 });
 
 Route::group(['prefix' => 'kullanici', 'as' => 'kullanici.'], function () {
-    Route::get('/oturumac', [KullaniciController::class, 'giris_form'])->name('oturumac.form');
+    Route::get('/oturumac', [KullaniciController::class, 'giris_form'])->name('oturumac.form'); //oturumac
     Route::post('/oturumac', [KullaniciController::class, 'giris'])->name('oturumac');
     Route::get('/kayitol', [KullaniciController::class, 'kaydol_form'])->name('kaydol.form');
     Route::post('/kayitol', [KullaniciController::class, 'kaydol'])->name('kaydol');

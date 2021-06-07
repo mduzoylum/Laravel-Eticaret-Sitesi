@@ -62,7 +62,7 @@
                     <input type="submit" class="btn btn-info pull-left" value="Sepeti Boşalt">
                 </form>
                 <div>
-                    <a href="#" class="btn btn-success pull-right btn-lg">Ödeme Yap</a>
+                    <a href="{{route('odeme')}}" class="btn btn-success pull-right btn-lg">Ödeme Yap</a>
                 </div>
             @else
                 <div class="text-center">

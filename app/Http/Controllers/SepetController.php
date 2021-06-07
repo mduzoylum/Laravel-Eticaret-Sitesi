@@ -104,7 +104,7 @@ class SepetController extends Controller
 
         Cart::update($rowid, request('adet'));
         session()->flash('mesaj_tur', 'success');
-        session()->flash('mesaj', ';Adet Bilgisi Güncellendi');
+        session()->flash('mesaj', 'Adet Bilgisi Güncellendi');
         return response()->json(['success' => true]);
     }
 }
